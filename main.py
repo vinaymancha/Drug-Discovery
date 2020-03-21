@@ -51,6 +51,21 @@ def RMSE_np(x, y):
     return np.sqrt(np.sum(np.square(x - y)) / n)
   
 if __name__ == "__main__":
+        for dataset_name in dataset_names:
+        test_stat_hold = list()
+        best_RMSE = float("inf")
+
+        print 'Training on Data-set: ' + dataset_name
+        test_file = data_root + dataset_name + '_test_disguised.csv'
+        train_file = data_root + dataset_name + '_training_disguised.csv'
+
+        data_train = ReadPandas(train_file, dropnan=True)
+        Act_inx = data_train.dataframe.columns.get_loc('Act')
+        feature_dim = data_train.dataframe.shape[1] - (Act_inx+1)
+
+        # split randomly train and val
+        data_train, data_val = data_train >> SplitRandom(ratio=0.8) >> Collect()
+        data_test = ReadPandas(test_file, dropnan=True)
   
   
   
