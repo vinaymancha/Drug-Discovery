@@ -13,7 +13,7 @@ import sys
 
 # Global variables
 BATCH_SIZE = 64
-EPOCH = 100
+EPOCH =70
 VAL_FREQ = 1
 NET_ARCH = 'DNN'
 
@@ -83,7 +83,7 @@ if __name__ == "__main__":
             opti = Adam(lr=0.0001, beta_1=0.5)
         elif NET_ARCH == 'DNN':
             model = DNN(input_shape=(feature_dim,))
-            opti = sgd(lr=0.05, momentum=0.9, clipnorm=1.0)
+            opti = sgd(lr=0.01, momentum=0.9, clipnorm=1.0)
         else:
             sys.exit("Network not defined correctly, check NET_ARCH. ")
 
