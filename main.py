@@ -14,7 +14,7 @@ import sys
 # Global variables
 BATCH_SIZE = 64
 EPOCH = 100
-VAL_FREQ = 5
+VAL_FREQ = 1
 NET_ARCH = 'DNN'
 
 data_root = 'C:/Users/vinay/Desktop/Drug Discovery/preprocessed/'
@@ -25,7 +25,7 @@ dataset_names = ['CB1', 'DPP4', 'HIVINT', 'HIVPROT', 'METAB', 'NK1', 'OX1', 'PGP
 dataset_stats = pd.read_csv(data_root + 'dataset_stats.csv', header=None, names=['mean', 'std'], index_col=0)
 
 
-def Rsqured_np(x, y):
+def Rsqured(x, y):
     
     x = np.asarray(x, dtype=float)
     y = np.asarray(y, dtype=float)
@@ -113,7 +113,7 @@ if __name__ == "__main__":
                 preds = data_val >> Map(organize_features) >> build_batch >> Map(predict_network_batch) >> Flatten() >> Map(scale_activators) >> Collect()
 
                 RMSE_e = RMSE_np(preds, trues)
-                Rsquared_e = Rsqured_np(preds, trues)
+                Rsquared_e = Rsqured(preds, trues)
                 print('Dataset ' + dataset_name + ' Epoch ' + str(e), ' : RMSE = ' + str(RMSE_e) + ', R-Squared = ' + str(Rsquared_e))
                 test_stat_hold.append(('Epoch ' + str(e), RMSE_e, Rsquared_e))
 
@@ -128,7 +128,7 @@ if __name__ == "__main__":
         preds = data_test >> Map(organize_features) >> build_batch >> Map(predict_network_batch) >> Flatten() >> Map(scale_activators) >> Collect()
 
         RMSE_e = RMSE_np(preds, trues)
-        Rsquared_e = Rsqured_np(preds, trues)
+        Rsquared_e = Rsqured(preds, trues)
         print('Dataset ' + dataset_name + ' Test : RMSE = ' + str(RMSE_e) + ', R-Squared = ' + str(Rsquared_e))
         test_stat_hold.append(('Final', RMSE_e, Rsquared_e))
 
