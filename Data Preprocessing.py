@@ -69,3 +69,7 @@ for dataset_name in dataset_names:
     test.to_csv(test_filename_save, index=False)
 
     print('Done dataset ', dataset_name)
+
+    
+df=pd.DataFrame(stat_hold)
+df.to_csv(save_root + 'dataset_stats.csv', index=False)
