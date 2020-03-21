@@ -18,8 +18,8 @@ for dataset_name in dataset_names:
     test_filename = data_root + dataset_name + '_test_disguised.csv'
     train_filename = data_root + dataset_name + '_training_disguised.csv'
 
-    test_filename_save = save_root + dataset_name + '_test_disguised.csv'
-    train_filename_save = save_root + dataset_name + '_training_disguised.csv'
+    test_filename_save = save_root + dataset_name + '_test.csv'
+    train_filename_save = save_root + dataset_name + '_training.csv'
 
     print('Preprocessing dataset ', dataset_name)
 
@@ -35,9 +35,6 @@ for dataset_name in dataset_names:
     # remove columns that are not common to both training and test sets
     train_inx = [inx for inx in train.columns.values if inx in set.intersection(train_inx_set, test_inx_set)]
     test_inx = [inx for inx in test.columns.values if inx in set.intersection(train_inx_set, test_inx_set)]
-
-    # print train_inx
-    # print test_inx
 
     train = train[train_inx]
     test = test[test_inx]
@@ -57,13 +54,13 @@ for dataset_name in dataset_names:
 
     # rescale features
     if FEATURE_SCALE == 'log':
-        train.ix[:, 2:] = np.log(train.ix[:, 2:] + 1)
-        test.ix[:, 2:] = np.log(test.ix[:, 2:] + 1)
+        train.iloc[:, 2:] = np.log(train.iloc[:, 2:] + 1)
+        test.iloc[:, 2:] = np.log(test.iloc[:, 2:] + 1)
 
     elif FEATURE_SCALE == 'uniform':
         max_feature = train.max(axis=0)[2:]
-        train.ix[:, 2:] = train.ix[:, 2:] / max_feature
-        test.ix[:, 2:] = test.ix[:, 2:] / max_feature
+        train.iloc[:, 2:] = train.iloc[:, 2:] / max_feature
+        test.iloc[:, 2:] = test.iloc[:, 2:] / max_feature
     else:
         sys.exit("Check FEATURE_SCALE.")
 
