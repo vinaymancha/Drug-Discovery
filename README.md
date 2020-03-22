@@ -14,4 +14,5 @@ The data is based on 14 target molecules and over 10,000 compounds for each targ
 http://pubs.acs.org/doi/suppl/10.1021/ci500747n/suppl_file/ci500747n_si_002.zip
 
 
-# 
+For Futher Reference:
+http://www.cs.toronto.edu/~gdahl/papers/deepQSARJChemInfModel2015.pdf
