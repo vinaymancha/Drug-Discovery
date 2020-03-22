@@ -13,6 +13,11 @@ The data is based on 14 target molecules and over 10,000 compounds for each targ
 # Dataset
 http://pubs.acs.org/doi/suppl/10.1021/ci500747n/suppl_file/ci500747n_si_002.zip
 
+# Instructions
+  * Set data_root and save_root variables in data_preprocessing.py and run it
+  * Point the data_root in main.py to where the pre-processed training and test files are located
+  * Run main.py
 
-For Futher Reference:
+# For Further Reference:
+
 http://www.cs.toronto.edu/~gdahl/papers/deepQSARJChemInfModel2015.pdf
